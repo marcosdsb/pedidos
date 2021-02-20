@@ -75,6 +75,13 @@ public class PedidoController {
         return pedidoAtualizado != null ? ResponseEntity.ok(dto) : ResponseEntity.noContent().build();
     }
 
+    @DeleteMapping("/{numPedido}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ApiOperation(value = "Deleta Pedido pelo número do Pedido")
+    public void deletarPedido(@PathVariable Integer numPedido) {
+        service.deletarPedido(numPedido);
+    }
+
     
 
 }

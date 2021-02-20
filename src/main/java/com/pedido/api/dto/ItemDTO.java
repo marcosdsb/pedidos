@@ -14,7 +14,7 @@ public class ItemDTO {
 	
 	private Long id;
 	
-	private Long pedido;
+//	private Long pedido;
 	
 	private String descricao;
 	

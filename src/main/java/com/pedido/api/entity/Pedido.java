@@ -26,20 +26,15 @@ public class Pedido {
 	private Long id;
 
 	@Column(name = "NUM_PEDIDO")
-	private Integer pedido;
+	private Integer numPedido;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "STATUS")
 	private StatusEnum status;
-	
-//	@ManyToMany( mappedBy="pedidos",
-//			cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE})
-//	@JsonBackReference("pedidos")
-//	private List<Item> itens;
 
-	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE})
-	@JsonBackReference("pedidos")
-	private Item item;
+	@OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE})
+	@JoinColumn(name = "PEDIDO_ID")
+	private List<Item> itens;
 
 
 }

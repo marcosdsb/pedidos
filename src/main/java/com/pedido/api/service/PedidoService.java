@@ -1,7 +1,5 @@
 package com.pedido.api.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,53 +17,48 @@ public class PedidoService {
     private PedidoRepository repository;
 
     public Optional<Pedido> buscarPorId(long id){
-
-//        return repository.findById(id);
-        return null;
-
+        return repository.findById(id);
     }
 
 
     public Pedido salvarPedido(Pedido pedido){
-
-//		pedido.getItens().forEach(item ->{
-//			item.setPedidos(new ArrayList<>());
-//			item.getPedidos().add(pedido);
-//		});
-//
-//        return repository.save(pedido);
-
-        return null;
+        Pedido pedidoSalvo = repository.save(pedido);
+        return pedidoSalvo;
 
     }
 
 
     public Pedido obterPeloNumeroPedido(Integer numPedido) {
 
-
-        return null;
+        Pedido pedido = repository.findByNumPedido(numPedido);
+        return pedido;
 
     }
 
     @Transactional
     public Pedido atualizarPedido(Integer numPedido, Pedido pedidoEn) {
 
-//        List<Pedido> pedidoList = repository.findByPedido(numPedido);
-//
-//        if(pedidoList.isEmpty()){
-//            return null;
-//        }
-//
-//        pedidoEn.setPedido(numPedido);
-//        pedidoEn.setId(pedidoList.get(0).getId());
-//
-//        repository.deleteAll(pedidoList);
-//
-//        Pedido pedidoSalvo = repository.save(pedidoEn);
-//
-//        return pedidoSalvo;
+        Pedido pedido = repository.findByNumPedido(numPedido);
 
-        return null;
+        if(pedido == null){
+            return null;
+        }
+
+        pedidoEn.setNumPedido(numPedido);
+        pedidoEn.setId(pedido.getId());
+
+        repository.delete(pedido);
+
+        Pedido pedidoSalvo = repository.save(pedidoEn);
+
+        return pedidoSalvo;
+
+    }
+
+    public void deletarPedido(Integer numPedido) {
+
+        Pedido pedido = repository.findByNumPedido(numPedido);
+        repository.delete(pedido);
 
     }
 }
