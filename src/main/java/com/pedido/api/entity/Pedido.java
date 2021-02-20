@@ -36,7 +36,8 @@ public class Pedido {
 	@Enumerated(EnumType.STRING)
 	private StatusEnum status;
 	
-	@ManyToMany(mappedBy="pedidos", cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+	@ManyToMany( mappedBy="pedidos",
+			cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE})
 	@JsonBackReference("pedidos")
 	private List<Item> itens;
 

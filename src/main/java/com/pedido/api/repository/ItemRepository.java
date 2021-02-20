@@ -7,6 +7,8 @@ import com.pedido.api.entity.Item;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
+
+
 	
 
 }

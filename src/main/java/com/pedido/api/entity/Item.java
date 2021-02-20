@@ -28,7 +28,7 @@ public class Item {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+	@ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE})
 	@JoinTable(name="PEDIDO_ITEM",
 	        joinColumns = {@JoinColumn(name="ID_ITEM")},
 	        inverseJoinColumns = {@JoinColumn(name="ID_PEDIDO")})
