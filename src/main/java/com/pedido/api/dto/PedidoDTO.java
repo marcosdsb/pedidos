@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class PedidoDTO {
 	
 	private Long id;
-	private Integer pedido;
+	private Integer numPedido;
 	private String status;
 	private List<ItemDTO> itens;
 

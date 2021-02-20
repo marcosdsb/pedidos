@@ -12,14 +12,11 @@ import java.util.List;
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
-    public Pedido findByPedido(Integer numPedido);
-
-    Long countByPedido(Integer numPedido);
-
-
-    @Query(value = "FROM PEDIDO pedido "
-            +"JOIN FETCH pedido.itens itens "
-            +"WHERE pedido.pedido=:numPedido")
-    List<Pedido> obterPedido(@Param("numPedido") Integer numPedido);
+//    public List<Pedido> findByPedido(Integer numPedido);
+//
+//    @Query(value = "FROM PEDIDO pedido "
+//            +"JOIN FETCH pedido.itens itens "
+//            +"WHERE pedido.pedido=:numPedido")
+//    List<Pedido> obterPedido(@Param("numPedido") Integer numPedido);
 
 }
