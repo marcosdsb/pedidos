@@ -11,6 +11,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+
 
 @Service
 public class StatusPedidoService {
@@ -39,8 +41,11 @@ public class StatusPedidoService {
 
     private void setarStatusPedido(StatusPedidoDTO statusPedidoDTO, Pedido pedido, ResponseDTO responseDTO, Integer totalItensPedido, BigDecimal valorTotalPedido) {
 
+        responseDTO.setStatus(new ArrayList<>());
+
         if(statusPedidoDTO.getStatus().equals(StatusEnum.REPROVADO)){
-            responseDTO.setStatus(StatusEnum.REPROVADO);
+            responseDTO.getStatus().add( StatusEnum.REPROVADO );
+
         } else {
 
             for(Item item : pedido.getItens()){
@@ -54,23 +59,23 @@ public class StatusPedidoService {
 
             if(totalItensPedido == statusPedidoDTO.getItensAprovados() &&
                     valorTotalPedido.compareTo( statusPedidoDTO.getValorAprovado()) == 0  ){
-                responseDTO.setStatus( StatusEnum.APROVADO );
+                responseDTO.getStatus().add( StatusEnum.APROVADO );
             }
 
             if(statusPedidoDTO.getItensAprovados().compareTo(totalItensPedido) > 0){
-                responseDTO.setStatus( StatusEnum.APROVADO_QTD_A_MAIOR );
+                responseDTO.getStatus().add( StatusEnum.APROVADO_QTD_A_MAIOR );
             }
 
             if(statusPedidoDTO.getItensAprovados() < totalItensPedido){
-                responseDTO.setStatus( StatusEnum.APROVADO_QTD_A_MENOR );
+                responseDTO.getStatus().add( StatusEnum.APROVADO_QTD_A_MENOR );
             }
 
             if(statusPedidoDTO.getValorAprovado().compareTo(valorTotalPedido) > 0){
-                responseDTO.setStatus( StatusEnum.APROVADO_VALOR_A_MAIOR );
+                responseDTO.getStatus().add( StatusEnum.APROVADO_VALOR_A_MAIOR );
             }
 
             if(statusPedidoDTO.getValorAprovado().compareTo(valorTotalPedido) < 0){
-                responseDTO.setStatus( StatusEnum.APROVADO_VALOR_A_MENOR );
+                responseDTO.getStatus().add( StatusEnum.APROVADO_VALOR_A_MENOR );
             }
 
         }
