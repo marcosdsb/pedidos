@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @Builder
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
@@ -24,7 +26,7 @@ public class Item {
 	private String descricao;
 
 	@Column(name = "PRECO_UNITARIO")
-	private Double precoUnitario;
+	private BigDecimal precoUnitario;
 
 	@Column(name = "QUANTIDADE")
 	private Integer quantidade;

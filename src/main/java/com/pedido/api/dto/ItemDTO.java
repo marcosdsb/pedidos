@@ -6,6 +6,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.math.BigDecimal;
+
+
 @Data
 @Builder
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
@@ -13,13 +18,15 @@ import lombok.NoArgsConstructor;
 public class ItemDTO {
 	
 	private Long id;
-	
-//	private Long pedido;
-	
+
+	@NotNull
+	@Size(min = 3, max = 50)
 	private String descricao;
-	
-	private Double precoUnitario;
-	
+
+	@NotNull
+	private BigDecimal precoUnitario;
+
+	@NotNull
 	private Integer quantidade;
 
 }

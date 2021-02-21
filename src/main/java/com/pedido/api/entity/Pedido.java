@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.pedido.api.enums.StatusEnum;
 
 import lombok.AccessLevel;
@@ -26,7 +25,7 @@ public class Pedido {
 	private Long id;
 
 	@Column(name = "NUM_PEDIDO")
-	private Integer numPedido;
+	private String numPedido;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "STATUS")

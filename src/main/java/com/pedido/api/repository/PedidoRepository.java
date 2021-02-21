@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
-    public Pedido findByNumPedido(Integer numPedido);
+    public Pedido findByNumPedido(String numPedido);
 
 }

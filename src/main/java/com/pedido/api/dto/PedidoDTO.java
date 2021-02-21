@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -14,8 +16,11 @@ import lombok.NoArgsConstructor;
 public class PedidoDTO {
 	
 	private Long id;
-	private Integer numPedido;
-	private String status;
+
+	@NotNull
+	private String numPedido;
+
+	@NotNull
 	private List<ItemDTO> itens;
 
 }

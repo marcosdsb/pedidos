@@ -3,7 +3,6 @@ package com.pedido.api.mapper;
 import com.pedido.api.dto.PedidoDTO;
 import com.pedido.api.entity.Pedido;
 import com.pedido.api.service.PedidoService;
-import org.apache.tomcat.util.json.ParseException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,7 @@ public class PedidoMapper {
     @Autowired
     private PedidoService service;
 
-    public Pedido convertToEntity(PedidoDTO pedidoDTO) throws ParseException {
+    public Pedido convertToEntity(PedidoDTO pedidoDTO) {
 
         Pedido pedido = modelMapper.map(pedidoDTO, Pedido.class);
 
@@ -31,14 +30,10 @@ public class PedidoMapper {
 
     }
 
-    public PedidoDTO convertToDTO(Pedido pedido) throws ParseException {
-
+    public PedidoDTO convertToDTO(Pedido pedido) {
         PedidoDTO pedidoDTO = modelMapper.map(pedido, PedidoDTO.class);
-
         return pedidoDTO;
 
     }
-
-
 
 }

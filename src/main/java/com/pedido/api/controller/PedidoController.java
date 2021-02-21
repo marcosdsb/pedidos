@@ -1,7 +1,7 @@
 package com.pedido.api.controller;
 
-
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import com.pedido.api.entity.Pedido;
 import com.pedido.api.mapper.PedidoMapper;
@@ -30,58 +30,39 @@ public class PedidoController {
     private PedidoMapper pedidoMapper;
 
 
-
     @PostMapping
     @ApiOperation(value = "Salva os pedidos com os Itens")
-    public ResponseEntity<PedidoDTO> gravarPedido(@RequestBody PedidoDTO pedido, HttpServletResponse response) throws ParseException {
+    public ResponseEntity<PedidoDTO> gravarPedido(@Valid @RequestBody PedidoDTO pedido, HttpServletResponse response)  {
 
         Pedido pedidoEn = pedidoMapper.convertToEntity(pedido);
-
         Pedido pedidoSalvo = service.salvarPedido(pedidoEn);
-
         PedidoDTO pedidoDTO = pedidoMapper.convertToDTO(pedidoSalvo);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(pedidoDTO);
     }
 
     @GetMapping("/{numPedido}")
     @ApiOperation(value = "Obter dados pelo número do pedido")
-    public ResponseEntity<PedidoDTO> ObterPeloNumeroPedido(@PathVariable Integer numPedido) throws ParseException {
+    public ResponseEntity<PedidoDTO> ObterPeloNumeroPedido(@PathVariable String numPedido) {
         Pedido pedido = service.obterPeloNumeroPedido(numPedido);
-        return pedido != null ? ResponseEntity.ok(pedidoMapper.convertToDTO(pedido)) : ResponseEntity.noContent().build();
+        return ResponseEntity.ok(pedidoMapper.convertToDTO(pedido));
     }
 
     @PutMapping("/{numPedido}")
     @ApiOperation(value = "Atualiza um pedido existente pelo número do pedido")
-    public ResponseEntity<PedidoDTO> atualizarCategoria(@PathVariable Integer numPedido, @RequestBody PedidoDTO pedidoDTO) {
+    public ResponseEntity<PedidoDTO> atualizarCategoria(@PathVariable String numPedido, @RequestBody PedidoDTO pedidoDTO) {
 
-        Pedido pedidoEn = null;
-        PedidoDTO dto = null;
-        Pedido pedidoAtualizado = null;
-
-        try{
-            pedidoEn = pedidoMapper.convertToEntity(pedidoDTO);
-            pedidoAtualizado = service.atualizarPedido(numPedido, pedidoEn);
-
-            if (pedidoAtualizado != null){
-                dto = pedidoMapper.convertToDTO(pedidoAtualizado);
-            }
-
-        } catch (Exception ex){
-            ex.printStackTrace();
-        }
-
-
-        return pedidoAtualizado != null ? ResponseEntity.ok(dto) : ResponseEntity.noContent().build();
+        Pedido pedidoEn = pedidoMapper.convertToEntity(pedidoDTO);
+        Pedido pedidoAtualizado = service.atualizarPedido(numPedido, pedidoEn);
+        PedidoDTO dto = pedidoMapper.convertToDTO(pedidoAtualizado);
+        return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping("/{numPedido}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation(value = "Deleta Pedido pelo número do Pedido")
-    public void deletarPedido(@PathVariable Integer numPedido) {
+    public void deletarPedido(@PathVariable String numPedido) {
         service.deletarPedido(numPedido);
     }
 
-    
 
 }
