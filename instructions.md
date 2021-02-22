@@ -78,6 +78,6 @@ localhost:9000/api/status</br>
 
 <h3>4.1 -  Acesso</h3>
    <p>→ Url: http://localhost:9000/h2</p>
-   <p>→ Login: as</p>
+   <p>→ Login: sa</p>
    <p>→password: deixar em branco </p>
 	
